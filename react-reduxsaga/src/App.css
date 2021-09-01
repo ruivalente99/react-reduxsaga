@@ -4,3 +4,53 @@
 .card {
   margin: 10px;
 }
+
+.container {
+  width: 75%;
+}
+
+.card-status {
+ color: red;
+}
+
+
+.table {
+  width: 200px;
+}
+.table-header {
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+
+h5{
+  font-size: 0.60rem;
+}
+
+h6{
+  font-size: 0.75rem;
+}
+
+.card{
+  height:150px;
+}
+
+.tables-flex{ 
+  display: flex;
+  flex-direction: row;
+  flex-grow: 0;
+  flex-wrap: wrap;
+  justify-content:center;
+  align-content:center;
+  align-self: auto;
+}
+
+.table-issue{ 
+  align-items: center;
+}
+
+.card-body{ 
+
+  align-items:center;
+
+}

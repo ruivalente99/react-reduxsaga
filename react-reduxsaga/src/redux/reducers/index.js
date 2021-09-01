@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import users from "./users";
+import issues from "./issues";
 
 const rootReducer = combineReducers({
-  users: users,
+  issues: issues,
 });
 
 export default rootReducer;

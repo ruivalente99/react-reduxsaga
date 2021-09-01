@@ -1,10 +1,14 @@
-import logo from './logo.svg';
+
 import './App.css';
-import Users from './components/UserComponent';
+import IssuesList from './components/IssuesList';
+
+
 function App() {
   return (
     <div className="App">
-     <Users />
+      
+         <IssuesList />
+    
     </div>
   );
 }
