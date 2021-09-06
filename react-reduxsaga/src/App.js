@@ -1,4 +1,4 @@
-
+import React from 'react';
 import './App.css';
 import IssuesList from './components/IssuesList';
 

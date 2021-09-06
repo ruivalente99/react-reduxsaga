@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getIssues } from "../redux/actions/issues";
 import IssuesTable from "./IssuesTable";
-import { DragDropContext } from 'react-beautiful-dnd';
+
 const IssuesList = () => {
   const dispatch = useDispatch();
   const issues = useSelector((state) => state.issues.issues);
@@ -32,17 +32,16 @@ const IssuesList = () => {
     </div>
   );
 
-
   useEffect(() => {
     dispatch(getIssues());
   }, [dispatch]);
 
   return (
-    <DragDropContext>
+    
     <div className="container">
       {list}
     </div>
-     </DragDropContext>
+    
   );
 };
 export default IssuesList;

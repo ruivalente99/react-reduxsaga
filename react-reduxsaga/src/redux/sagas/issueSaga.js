@@ -27,8 +27,14 @@ function getApi() {
       throw error;
     });
 }
-
-function* fetchUsers(action) {
+function pushApi(){
+  /*
+  
+      Send data back to the api to edit or create a new issue
+  
+  */
+}
+function* fetchIssues(action) {
   try {
     const issues = yield call(getApi);
     console.log(issues);
@@ -37,9 +43,18 @@ function* fetchUsers(action) {
     yield put({ type: "GET_ISSUES_FAILED", message: e.message });
   }
 }
+function* pushIssues(action){
+  try {
+    const issues = yield call(pushApi);
+    console.log(issues);
+    yield put({ type: "GET_ISSUES_SUCCESS", issues: issues });
+  } catch (e) {
+    yield put({ type: "GET_ISSUES_FAILED", message: e.message });
+  }
+}
 
 function* issueSaga() {
-  yield takeEvery("GET_ISSUES_REQUESTED", fetchUsers);
+  yield takeEvery("GET_ISSUES_REQUESTED", fetchIssues);
 }
 
 export default issueSaga;

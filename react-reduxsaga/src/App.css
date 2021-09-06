@@ -54,3 +54,7 @@ h6{
   align-items:center;
 
 }
+
+.dialog-title{
+  display: flex;
+}
