@@ -12,7 +12,9 @@ export class IssueCard extends PureComponent {
   }
 
   render() {
-    const closeDialog = () => { this.setState({ isOpen: false }); };
+    const closeDialog = () => {
+      this.setState({ isOpen: false });
+    };
     return (
       <Draggable draggableId={this.state.data.id} index={this.state.index}>
         {(provided, snapshot) => (
@@ -38,8 +40,7 @@ export class IssueCard extends PureComponent {
                 title={this.state.data.key}
                 setOpenDialog={closeDialog}
                 data={this.state.data}
-              >
-              </IssueDialog>
+              ></IssueDialog>
             ) : (
               <div></div>
             )}

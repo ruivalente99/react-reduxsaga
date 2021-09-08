@@ -58,3 +58,7 @@ h6{
 .dialog-title{
   display: flex;
 }
+
+.input{
+  width: 100%;
+}

@@ -28,6 +28,8 @@ function getApi() {
     });
 }
 function pushApi(){
+
+  console.log('PUSH');
   /*
   
       Send data back to the api to edit or create a new issue
@@ -47,9 +49,9 @@ function* pushIssues(action){
   try {
     const issues = yield call(pushApi);
     console.log(issues);
-    yield put({ type: "GET_ISSUES_SUCCESS", issues: issues });
+    yield put({ type: "POST_ISSUES_SUCCESS", issues: issues });
   } catch (e) {
-    yield put({ type: "GET_ISSUES_FAILED", message: e.message });
+    yield put({ type: "POST_ISSUES_FAILED", message: e.message });
   }
 }
 

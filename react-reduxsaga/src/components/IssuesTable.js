@@ -9,15 +9,20 @@ export default class IssuesTable extends Component {
     super(props);
     this.state = {
       issue: props.issue,
-      isOpen:false,
+      isOpen: false,
     };
   }
 
   render() {
     const onDragEnd = (result) => {
       const { destination, source, draggableId } = result;
-
       if (!destination) {
+        return;
+      }
+      if (destination.droppableId != source.droppableId) {
+        console.log(
+          "Moving between different columns doesnt work properly, yet"
+        );
         return;
       }
       // console.log(destination);
@@ -29,31 +34,38 @@ export default class IssuesTable extends Component {
       ) {
         return;
       }
-      console.log(this.state.issue);
-    
-      const issueDestination = this.state.issue[destination.droppableId-1].issues[destination.index]
-      const issueSource = this.state.issue[source.droppableId-1].issues[source.index];
-      const issueSwap = this.state.issue;
-      console.log(issueSwap[destination.droppableId-1].issues[destination.index]);
-      issueSwap[destination.droppableId-1].issues[destination.index] = issueSource;
-      issueSwap[source.droppableId-1].issues[source.index] = issueDestination;
-      console.log(issueSwap[destination.droppableId-1].issues[destination.index]);
-      this.setState({issue:issueSwap});
-      
+      const starredProjects = Object.assign([], this.state.issue);
+      const sauce =
+        this.state.issue[source.droppableId - 1].issues[source.index];
+      //console.log(sauce);
+      starredProjects[destination.droppableId - 1].issues.splice(
+        source.index,
+        1
+      );
+      starredProjects[destination.droppableId - 1].issues.splice(
+        destination.index,
+        0,
+        sauce
+      );
+      if (destination.droppableId - 1 != source.droppableId - 1) {
+        starredProjects[source.droppableId - 1].issues.splice(source.index, 1);
+      }
+      this.setState({
+        issue: starredProjects,
+      });
     };
 
     var table = this.state.issue.map((status) => {
       return (
-        
-        <Droppable droppableId={status.id + 1}>
+        <Droppable key={status.id + 1} droppableId={(status.id + 1).toString()}>
           {(provided, snapshot) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
-              <div key={status.id} className="table">
+              <div className="table">
                 <HeaderTable className="table-header" status={status.status} />
                 <br />
                 {status.issues.map((issue, index) => {
                   return (
-                    <div className="table-issues" >
+                    <div key={issue.key} className="table-issues">
                       <IssueCard data={issue} index={index} />
                     </div>
                   );
@@ -63,13 +75,12 @@ export default class IssuesTable extends Component {
             </div>
           )}
         </Droppable>
-        
       );
     });
 
     return (
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="tables-flex">{table}</div>;
+        <div className="tables-flex">{table}</div>
       </DragDropContext>
     );
   }
